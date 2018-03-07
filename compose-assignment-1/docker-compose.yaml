@@ -1,0 +1,12 @@
+# docker-compose.yaml
+version: '2'
+
+services:
+  drupal:
+    image: drupal:latest # play it safe and use the latest which is 2 releases behind (stable?)
+    ports: 
+      - '8080:80' # exposes 8080 on host and fowards to 80 in the container
+  postgres:
+    image: postgres:9.6
+    environment: 
+      POSTGRES_PASSWORD: password
