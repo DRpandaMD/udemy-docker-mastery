@@ -19,7 +19,7 @@
 # Then, just to be safe, change the working directory back to its default (from drupal image) 
 # at `/var/www/html`
  
-FROM drupal:8.2
+FROM drupal:latest
 
 RUN apt-get update && apt-get install -y git \
     && rm -rf /var/lib/apt/list/* 

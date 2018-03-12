@@ -1,5 +1,5 @@
 #  @Bret Fisher
-docker-compose up --build
+docker-compose up --build (add '-d')
 docker-compose down  (-v)
 
 I had one successful run time of this enviornment but after the intial 'up' and 'down'
