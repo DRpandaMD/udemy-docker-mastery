@@ -21,7 +21,7 @@ docker network create -d overlay frontend
     - on frontend network
     - 2+ replicas of this container
 
-docker service create --name vote -p 80:80 --network frontend --replica 2 dockersamples/examplevotingapp_vote:before
+docker service create --name vote -p 80:80 --network frontend --replicas 2 dockersamples/examplevotingapp_vote:before
 
 - redis
     - redis:3.2
@@ -30,7 +30,7 @@ docker service create --name vote -p 80:80 --network frontend --replica 2 docker
     - on frontend network
     - 1 replica NOTE VIDEO SAYS TWO BUT ONLY ONE NEEDED
 
-docker service create --name redis --replica 1 --network frontend redis:3.2
+docker service create --name redis --replicas 1 --network frontend redis:3.2
 
 
 - worker
@@ -49,6 +49,8 @@ docker service create --name worker --network frontend --network backend  docker
     - on backend network
     - 1 replica
 
+docker service create --name postgresql --network backend --mount type=volume,source=db-data,target=/var/lib/postgresql/data postgres:9.4
+
 - result
     - dockersamples/examplevotingapp_result:before
     - web app that shows results
@@ -56,3 +58,5 @@ docker service create --name worker --network frontend --network backend  docker
     - so run on a high port of your choosing (I choose 5001), container listens on 80
     - on backend network
     - 1 replica
+
+docker service create --name result --network backend -p 5001:80 dockersamples/examplevotingapp_result:before
