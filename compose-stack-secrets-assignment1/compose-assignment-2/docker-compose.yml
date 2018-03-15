@@ -1,12 +1,11 @@
 # create your drupal and postgres config here, based off the last assignment
 
 # docker-compose.yaml
-version: '2'
+version: '3'
 
 services:
   drupal:
-    image: custom-drupal 
-    build: .
+    image: drupal:8.2
     ports: 
       - '8080:80' # exposes 8080 on host and fowards to 80 in the container
     volumes:
@@ -18,7 +17,9 @@ services:
   postgres:
     image: postgres:9.6
     environment: 
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD_FILE=/run/secrets/psql-pw
+    secrets:
+      - psql-pw
     volumes:
       - drupal-data:/var/lib/postgresql/data
 
@@ -28,3 +29,7 @@ volumes:
   drupal-profiles:
   drupal-sites:
   drupal-themes:
+
+secrets:
+  psql-pw:
+    external: true
