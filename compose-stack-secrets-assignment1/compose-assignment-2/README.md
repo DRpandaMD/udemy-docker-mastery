@@ -1,9 +1,4 @@
-#  @Bret Fisher
-docker-compose up --build (add '-d')
-docker-compose down  (-v)
-
-I had one successful run time of this enviornment but after the intial 'up' and 'down'
-every subsequent 'up' has errored out with 139 while postgress seems to be functional
+# FOR STACK SECRETS ASSIGNMENT
 
 # Assignment: Compose For On-The-Fly Image Building and Multi-Container Testing
 
